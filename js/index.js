@@ -5,6 +5,11 @@ const state = {
     users: []
 }
 
+let currentUser = {
+    id: 0,
+    username: ''
+}
+
 const createPlaylistHeader = () => {
     const topPlaylistHeader = document.createElement('h2')
     topPlaylistHeader.innerText = 'Top Playlists'
