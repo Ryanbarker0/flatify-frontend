@@ -1,4 +1,6 @@
+const loginBtn = document.getElementById('login-btn')
 const signUpBtn = document.getElementById('sign-up-btn')
+
 
 const renderSignUpHeader = () => {
     const signUpFormHeader = document.createElement('h2')
@@ -18,7 +20,7 @@ const renderSignUpForm = () => {
     `
     contentContainer.appendChild(signUpFormContainer)
     signUpFormListener()
-    
+
 }
 
 const createNewUserInDatabase = () => {
@@ -27,10 +29,10 @@ const createNewUserInDatabase = () => {
         username: usernameInput.value
     }
     return createNewUser(newUser)
-        .then(user => getCurrentUser(user))
+        .then(user => setCurrentUser(user))
 }
 
-const getCurrentUser = user => {
+const setCurrentUser = user => {
     currentUser = {
         id: user.id,
         username: user.username
@@ -42,20 +44,32 @@ const signUpFormListener = () => {
     signUpForm.addEventListener('submit', event => {
         event.preventDefault()
         createNewUserInDatabase()
-        .then(() => {if (currentUser.id > 0) {
-            console.log('im true')
-        } else {
-            console.log('im false') 
-        }
+            .then(() => {
+                if (currentUser.id > 0) {
+                    updateNavbar()
+                    renderHomepage()
+                } else {
+                    alert('This username is in-use, please Login.')
+                }
+            })
     })
-})
+}
+
+const toggleLogoutButton = () => {
+    loginBtn.classList.toggle('hide')
+    logoutBtn.classList.toggle('hide')
+    signUpBtn.classList.toggle('hide')
+}
+
+const updateNavbar = () => {
+    if (currentUser.id > 0) {
+        toggleLogoutButton()
+    }
 }
 
 signUpBtn.addEventListener('click', () => {
     contentContainer.innerHTML = ''
+    findAndRemoveActiveNavButton()
     renderSignUpHeader()
     renderSignUpForm()
 })
-
-
-

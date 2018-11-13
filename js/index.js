@@ -1,5 +1,10 @@
 const topPlaylistList = document.getElementById('top-playlist')
 const contentContainer = document.getElementById('content')
+const navbarContainer = document.getElementById('navbarSupportedContent')
+const navbarItems = [...(document.querySelectorAll('.nav-item'))]
+const homeBtn = document.getElementById('home-btn')
+const logoutBtn = document.getElementById('logout-btn')
+
 
 const state = {
     users: []
@@ -30,7 +35,7 @@ const renderUserPlaylists = (user) => {
         playlistElement.dataset.id = `${user.id}`
         playlistElement.innerText = `${playlist.name}`
         playlistContainer.appendChild(playlistElement)
-    })  
+    })
 }
 
 const renderAllUserPlaylists = users => {
@@ -39,13 +44,40 @@ const renderAllUserPlaylists = users => {
     users.forEach(user => renderUserPlaylists(user))
 }
 
+const activateHomepageButton = () => {
+    if (!homeBtn.classList.contains('active')) {
+        homeBtn.classList.add('active')
+        homeBtn.parentElement.classList.add('active')
+    }
+}
+
 const renderHomepage = () => {
-contentContainer.innerHTML = ''
-getUsers() 
-    .then(users => {
-        state.users = users
-        renderAllUserPlaylists(state.users)
-    })
+    contentContainer.innerHTML = ''
+    activateHomepageButton()
+    getUsers()
+        .then(users => {
+            state.users = users
+            renderAllUserPlaylists(state.users)
+        })
 }
 
 renderHomepage()
+
+const findCurrentUserInState = () => state.users.find(user => user.id === currentUser.id)
+
+const findAndRemoveActiveNavButton = () => {
+    const activeButton = navbarItems.find(el => el.classList.contains('active'))
+    activeButton.classList.remove('active')
+    activeButton.firstElementChild.classList.remove('active')
+}
+
+const removeElement = element => {
+    element.parentNode.removeChild(element)
+}
+
+const addElement = (parent, element) => {
+    parent.appendChild(element)
+}
+
+homeBtn.addEventListener('click', () => { renderHomepage() })
+logoutBtn.addEventListener('click', () => { window.location.reload() })
