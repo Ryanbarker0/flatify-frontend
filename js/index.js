@@ -1,4 +1,4 @@
-const playlistList = document.getElementById('playlist-list')
+const topPlaylistList = document.getElementById('top-playlist')
 
 
 const state = {
@@ -10,7 +10,7 @@ const renderUserPlaylists = user => {
         const playlistElement = document.createElement('li')
         playlistElement.dataset.id = `${user.id}`
         playlistElement.innerText = `${playlist.name}`
-        playlistList.appendChild(playlistElement)
+        topPlaylistList.appendChild(playlistElement)
     })  
 }
 
