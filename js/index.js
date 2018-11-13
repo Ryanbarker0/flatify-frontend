@@ -39,8 +39,13 @@ const renderAllUserPlaylists = users => {
     users.forEach(user => renderUserPlaylists(user))
 }
 
+const renderHomepage = () => {
+contentContainer.innerHTML = ''
 getUsers() 
     .then(users => {
         state.users = users
         renderAllUserPlaylists(state.users)
     })
+}
+
+renderHomepage()

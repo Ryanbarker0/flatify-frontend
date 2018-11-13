@@ -26,16 +26,8 @@ const createNewUserInDatabase = () => {
     const newUser = {
         username: usernameInput.value
     }
-    createNewUser(newUser)
+    return createNewUser(newUser)
         .then(user => getCurrentUser(user))
-}
-
-const signUpFormListener = () => {
-    const signUpForm = document.getElementById('sign-up-form')
-    signUpForm.addEventListener('submit', event => {
-        event.preventDefault()
-        createNewUserInDatabase()
-    })
 }
 
 const getCurrentUser = user => {
@@ -43,6 +35,20 @@ const getCurrentUser = user => {
         id: user.id,
         username: user.username
     }
+}
+
+const signUpFormListener = () => {
+    const signUpForm = document.getElementById('sign-up-form')
+    signUpForm.addEventListener('submit', event => {
+        event.preventDefault()
+        createNewUserInDatabase()
+        .then(() => {if (currentUser.id > 0) {
+            console.log('im true')
+        } else {
+            console.log('im false') 
+        }
+    })
+})
 }
 
 signUpBtn.addEventListener('click', () => {
