@@ -71,6 +71,12 @@ const findAndRemoveActiveNavButton = () => {
     activeButton.firstElementChild.classList.remove('active')
 }
 
+const toggleLogoutButton = () => {
+    loginBtn.classList.toggle('hide')
+    logoutBtn.classList.toggle('hide')
+    signUpBtn.classList.toggle('hide')
+}
+
 const removeElement = element => {
     element.parentNode.removeChild(element)
 }
