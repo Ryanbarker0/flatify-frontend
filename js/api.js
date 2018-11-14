@@ -7,6 +7,11 @@ const getUsers = async () => {
     return response.json()
 }
 
+const getPlaylist = async playlist => {
+    const response = await fetch(`${usersURL}/${playlist.id}`)
+    return response.json()
+}
+
 const createNewUser = newUser => 
     fetch(usersURL, {
         method: 'POST',

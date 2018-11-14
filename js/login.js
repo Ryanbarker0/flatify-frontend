@@ -24,6 +24,7 @@ const findCurrentUser = userInput => {
     if (foundUser) {
         currentUser.id = foundUser.id
         currentUser.username = foundUser.username
+        toggleLogoutButton()
         renderHomepage()
     } else {
         alert('This username does not exist, please sign up.')

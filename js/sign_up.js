@@ -55,12 +55,6 @@ const signUpFormListener = () => {
     })
 }
 
-const toggleLogoutButton = () => {
-    loginBtn.classList.toggle('hide')
-    logoutBtn.classList.toggle('hide')
-    signUpBtn.classList.toggle('hide')
-}
-
 const updateNavbar = () => {
     if (currentUser.id > 0) {
         toggleLogoutButton()
