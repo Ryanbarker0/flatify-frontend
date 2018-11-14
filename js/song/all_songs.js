@@ -25,7 +25,7 @@ const getAllSongs = () => {
 getSongs()
     .then(songs => {
         renderAllSongs(songs)
-        checkIfSongIsLiked()
+        checkIfElementIsLiked()
     })
 }
 
@@ -44,11 +44,15 @@ const checkIfSongIsLiked = () => {
     const iTags = document.getElementsByTagName('i')
     const iTagsArray = [...iTags]
     iTagsArray.forEach(el => {
-        findCurrentUserInState().songs.forEach(song => {
-            if (song.id == parseInt(el.dataset.id)) {
-                addLikeClassToHeart(el)
-            }
+        matchSongIdWithTargetId(el)
         })
+    }
+
+const matchSongIdWithTargetId = element => {
+    findCurrentUserInState().songs.forEach(song => {
+        if (song.id == parseInt(element.dataset.id)) {
+            addLikeClassToHeart(element)
+        }   
     })
 }
 
@@ -56,6 +60,8 @@ const addLikeClassToHeart = element => {
     element.setAttribute('class', "fas fa-heart liked-song")
     element.setAttribute('id', "liked-song-heart")
 }
+
+
 
 
 document.addEventListener('click', event => {
