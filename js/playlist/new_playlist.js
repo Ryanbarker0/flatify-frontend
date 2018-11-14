@@ -4,9 +4,7 @@ const addPlaylistBtn = document.getElementById('add-playlist')
 // when add playlist is clicked, check if user is logged in 
 // 
 
-const recentPlaylist = {
-    playlist: []
-}
+const recentPlaylist = []
 
 const renderAddPlaylistHeader = () => {
     const addPlaylistHeader = document.createElement('h2')
@@ -36,8 +34,8 @@ const createNewPlaylistInDatabase = () => {
     }
     return createNewPlaylist(newPlaylist)
         .then(playlist => {
-            recentPlaylist.playlist = playlist
-            updateUsersPlaylist(findCurrentUserInState(), recentPlaylist.playlist)
+            recentPlaylist = playlist
+            updateUsersPlaylist(findCurrentUserInState(), recentPlaylist)
         })
 }
 
