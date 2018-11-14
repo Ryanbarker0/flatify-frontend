@@ -1,6 +1,7 @@
 const usersURL = `http://localhost:3000/api/v1/users`
 const playlistsURL = `http://localhost:3000/api/v1/playlists`
 const userPlaylistsURL = `http://localhost:3000/api/v1/user_playlists`
+const songsURL = `http://localhost:3000/api/v1/songs`
 
 const getUsers = async () => {
     const response = await fetch(usersURL)
@@ -36,3 +37,20 @@ const updateUsersPlaylist = (user, mostRecentPlaylist) =>
             playlist_id: mostRecentPlaylist.id
         })
     }).then(resp => resp.json())
+
+
+
+
+    const getSongs = async () => {
+        const response = await fetch(songsURL)
+        return response.json()
+    }
+    
+    const createNewSong = newSong => 
+        fetch(songsURL, {
+            method: 'POST',
+            headers: {
+                "Content-Type":"application/json"
+                    },
+            body: JSON.stringify(newSong)
+        }).then(resp => resp.json())
