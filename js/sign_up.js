@@ -1,7 +1,6 @@
 const loginBtn = document.getElementById('login-btn')
 const signUpBtn = document.getElementById('sign-up-btn')
 
-
 const renderSignUpHeader = () => {
     const signUpFormHeader = document.createElement('h2')
     signUpFormHeader.innerText = 'Sign Up'

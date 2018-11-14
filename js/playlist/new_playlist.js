@@ -6,7 +6,6 @@ const addPlaylistBtn = document.getElementById('add-playlist')
 
 let recentPlaylist = []
 
-
 const renderAddPlaylistHeader = () => {
     const addPlaylistHeader = document.createElement('h2')
     addPlaylistHeader.innerText = 'Add Playlist'

@@ -1,6 +1,4 @@
-// render playlist title
-// iterate and render songs for the given playlist
-
+// add functionality for when an individual playlist is clicked
 const renderPlaylistTitle = playlist => {
     const playlistTitle = document.createElement('h2')
     playlistTitle.innerText = `${playlist.name}`
@@ -18,7 +16,7 @@ const renderPlaylistSongs = playlist => {
     const songsContainer = document.createElement('ol')
     playlist.songs.forEach(song => {
         const songElement = document.createElement('li')
-        songElement.innerHTML = `${song.name}<button data-id="${song.id}">Delete Song</button>`
+        songElement.innerHTML = `${song.name} <button data-id="${song.id}">Delete Song</button>`
         songsContainer.appendChild(songElement)
     })
     contentContainer.appendChild(songsContainer)
@@ -28,7 +26,7 @@ const renderPlaylist = playlist => {
     contentContainer.innerHTML = ''
     renderPlaylistTitle(playlist)
     if (playlist.songs) {
-        renderPlaylistSongs()
+        renderPlaylistSongs(playlist)
     } else {
         renderEmptyPlaylist()
     }

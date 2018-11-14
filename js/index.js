@@ -15,6 +15,10 @@ let currentUser = {
     username: ''
 }
 
+const localPlaylists = {
+    playlists: []
+}
+
 const createPlaylistHeader = () => {
     const topPlaylistHeader = document.createElement('h2')
     topPlaylistHeader.innerText = 'Top Playlists'
