@@ -3,6 +3,7 @@
 
 const addSongBtn = document.getElementById('add-song-btn')
 
+
 let addedSong = []
 
 const renderAddSongHeader = () => {

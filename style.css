@@ -1,3 +1,15 @@
+body {
+    background-color: #282828;
+    color: white;
+    margin-top: 6em;
+}
+
+
+
+.active {
+    color: #1DB954;
+}
+
 .hide {
     display: none;
 }
@@ -6,3 +18,4 @@
 #liked-song-heart {
     color: red;
 }
+
