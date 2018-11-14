@@ -6,24 +6,11 @@ const trackSearchRequest = query => {
         method: 'GET',
         headers: {
             "Accept":"application/json",
-            "Content-Type":"application/json"
+            "Content-Type":"application/json",
             "Authorization":`Bearer ${token}`
         }
     })
 } 
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const initializeSpotifySDK = () =>
     window.onSpotifyWebPlaybackSDKReady = () => {
@@ -56,4 +43,4 @@ const initializeSpotifySDK = () =>
   player.connect();
 };
 
-initializeSpotifySDK()
+// initializeSpotifySDK()
