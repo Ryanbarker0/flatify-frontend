@@ -1,9 +1,12 @@
 const addPlaylistBtn = document.getElementById('add-playlist')
-// add form for playlist name 
-// takes form values, sends post request
+
 // redirects to empty playlist
 // when add playlist is clicked, check if user is logged in 
 // 
+
+const recentPlaylist = {
+    playlist: []
+}
 
 const renderAddPlaylistHeader = () => {
     const addPlaylistHeader = document.createElement('h2')
@@ -33,7 +36,8 @@ const createNewPlaylistInDatabase = () => {
     }
     return createNewPlaylist(newPlaylist)
         .then(playlist => {
-            findCurrentUserInState().playlists.push(playlist)
+            recentPlaylist.playlist = playlist
+            updateUsersPlaylist(findCurrentUserInState(), recentPlaylist.playlist)
         })
 }
 
@@ -42,13 +46,6 @@ const newPlaylistFormListener = () => {
     newPlaylistFormContainer.addEventListener('submit', event => {
         event.preventDefault()
         createNewPlaylistInDatabase()
-        console.log(findCurrentUserInState())
-        // updateUsersPlaylist(findCurrentUserInState())
-
-        // creates playlist in database
-        // need to post to playlist 
-        // might need to post to user_playlist - add routes in backend
-        // can update local state by pushing in new playlist, then patching
     })
 }
 
