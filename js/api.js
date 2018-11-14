@@ -57,14 +57,27 @@ const createNewSong = newSong =>
     }).then(resp => resp.json())
 
 
-const updateLikes = (user, songLikes) => 
-fetch(`${likesURL}`, {
-    method: 'POST',
-    headers: {
-        "Content-Type":"application/json"
-    },
-    body: JSON.stringify({
-        user_id: user.id,
-        song_id: song.id
-    })
-}).then(resp => resp.json())
+const createLikeWhenAdded = (user, likedSong) => 
+    fetch(`${likesURL}`, {
+        method: 'POST',
+        headers: {
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({
+            user_id: user.id,
+            song_id: likedSong.id
+        })
+    }).then(resp => resp.json())
+
+
+const likeSong = (user, likedSong) => 
+    fetch(`${likesURL}`, {
+        method: 'POST',
+        headers: {
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({
+            user_id: user,
+            song_id: likedSong
+        })
+    }).then(resp => resp.json())

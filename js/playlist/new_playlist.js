@@ -4,7 +4,7 @@ const addPlaylistBtn = document.getElementById('add-playlist')
 // when add playlist is clicked, check if user is logged in 
 // 
 
-const recentPlaylist = []
+let recentPlaylist = []
 
 const renderAddPlaylistHeader = () => {
     const addPlaylistHeader = document.createElement('h2')
