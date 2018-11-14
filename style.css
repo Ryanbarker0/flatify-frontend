@@ -1,3 +1,8 @@
 .hide {
     display: none;
 }
+
+/* Liked Heart Icon */
+#liked-song-heart {
+    color: red;
+}

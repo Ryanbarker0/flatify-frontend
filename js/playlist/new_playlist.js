@@ -5,7 +5,10 @@ const addPlaylistBtn = document.getElementById('add-playlist')
 // 
 
 let recentPlaylist = []
+<<<<<<< HEAD
 
+=======
+>>>>>>> johnnys-branch
 
 const renderAddPlaylistHeader = () => {
     const addPlaylistHeader = document.createElement('h2')

@@ -3,7 +3,7 @@
 
 const addSongBtn = document.getElementById('add-song-btn')
 
-
+let addedSong = []
 
 const renderAddSongHeader = () => {
     const addSongFormHeader = document.createElement('h2')
@@ -38,7 +38,11 @@ const createNewSongInDatabase = () => {
         genre: songGenre.value,
     }
     return createNewSong(newSong)
-    .then(songAdded)     
+    .then(song => {
+        addedSong = song
+        createLikeWhenAdded(findCurrentUserInState(), addedSong)
+        console.log(addedSong);
+    }).then(songAdded)
 }
 
 const songAdded = () => {
@@ -76,5 +80,7 @@ const userLoggedIn = () => {
 addSongBtn.addEventListener('click', () => {
     userLoggedIn()
 })
+
+
 
 
