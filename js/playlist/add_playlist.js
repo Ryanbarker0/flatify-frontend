@@ -4,6 +4,7 @@ let recentPlaylist = []
 
 const renderAddPlaylistHeader = () => {
     const addPlaylistHeader = document.createElement('h2')
+    addPlaylistHeader.classList.add('text-center')
     addPlaylistHeader.innerText = 'Add Playlist'
     contentContainer.appendChild(addPlaylistHeader)
 }
@@ -13,10 +14,12 @@ const renderNewPlaylistForm = () => {
     newPlaylistFormContainer.id = 'add-playlist-form'
     newPlaylistFormContainer.innerHTML = `
         <div class="form-row">
-          <div class="col">
-            <input id='playlist-name-input' type="text" class="form-control" placeholder="Playlist Name...">
+          <div class="col text-center">
+            <br>
+            <input id='playlist-name-input' type="text" class="form-control-lg" placeholder="Playlist Name...">
+            <br><br>
+            <button type="submit" class="btn btn-primary">Create Playlist</button>
           </div>
-        <button type="submit" class="btn btn-primary">Create Playlist</button>
     `
     contentContainer.appendChild(newPlaylistFormContainer)
     newPlaylistFormListener()

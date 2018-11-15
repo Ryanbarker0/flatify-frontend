@@ -1,6 +1,7 @@
 
 const renderLoginHeader = () => {
     const loginFormHeader = document.createElement('h2')
+    loginFormHeader.classList.add('text-center')
     loginFormHeader.innerText = 'Login'
     contentContainer.appendChild(loginFormHeader)
 }
@@ -10,10 +11,12 @@ const renderLoginForm = () => {
     loginFormContainer.id = 'login-form'
     loginFormContainer.innerHTML = `
         <div class="form-row">
-          <div class="col">
-            <input id='username-input' type="text" class="form-control" placeholder="Enter A Username...">
+          <div class="col text-center">
+            <br>
+            <input id='username-input' type="text" class="form-control-lg" placeholder="Enter Your Username">
+            <br><br>
+            <button type="submit" class="btn btn-primary">Login</button>
           </div>
-        <button type="submit" class="btn btn-primary">Login</button>
         
     `
     contentContainer.appendChild(loginFormContainer)

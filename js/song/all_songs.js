@@ -66,20 +66,18 @@ const toggleLikeClassToHeart = element => {
 }
 
 document.addEventListener('click', event => {
-
+       
     if (event.target.classList.contains('heart')) {
-        if (!currentUser.id) {
-            return notLoggedInError()
-        }
+       if (!currentUser.id) { return notLoggedInError() }
+       
+       const id = event.target.dataset.id
+       const likedSong = event.target
+       toggleLikeClassToHeart(likedSong)
 
-        const id = event.target.dataset.id
-        const likedSong = event.target
-        toggleLikeClassToHeart(likedSong)
-
-        if (event.target.classList.contains('fas')) {
-            likeSong(currentUser.id, parseInt(id))
-        }
-    }
+       if (event.target.classList.contains('fas')) { 
+           likeSong(currentUser.id, parseInt(id))
+       }
+    }  
 })
 
 const addPlaylistDropDownMenu = (element, user, song) => {
@@ -90,6 +88,7 @@ const addPlaylistDropDownMenu = (element, user, song) => {
     <span class="caret"></span></button>
     <ul id='dropdown-menu-${song.id}' class="dropdown-menu" role="menu" aria-labelledby="menu1">
     </ul>
+
     `
     element.appendChild(dropDownContainer)
     user.playlists.forEach(playlist => addPlaylistElementsToDropDown(playlist, song))
@@ -99,7 +98,10 @@ const addPlaylistElementsToDropDown = (playlist, song) => {
     const dropdownMenu = document.getElementById(`dropdown-menu-${song.id}`)
     const dropdownItem = document.createElement('li')
     dropdownItem.role = 'presentation'
-    dropdownItem.innerHTML = `<a data-song='${song.id}' data-playlist='${playlist.id}' class='menuitem' role="menuitem" tabindex="-1" href="#">${playlist.name}</a>`
+    dropdownItem.innerHTML = `
+    <a data-song='${song.id}' data-playlist='${playlist.id}' class='menuitem' role="menuitem" tabindex="-1" href="#">${playlist.name}</a>
+
+    `
     dropdownMenu.appendChild(dropdownItem)
 }
 

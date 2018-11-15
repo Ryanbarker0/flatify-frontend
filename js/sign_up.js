@@ -3,6 +3,7 @@ const signUpBtn = document.getElementById('sign-up-btn')
 
 const renderSignUpHeader = () => {
     const signUpFormHeader = document.createElement('h2')
+    signUpFormHeader.classList.add('text-center')
     signUpFormHeader.innerText = 'Sign Up'
     contentContainer.appendChild(signUpFormHeader)
 }
@@ -12,10 +13,12 @@ const renderSignUpForm = () => {
     signUpFormContainer.id = 'sign-up-form'
     signUpFormContainer.innerHTML = `
         <div class="form-row">
-          <div class="col">
-            <input id='username-input' type="text" class="form-control" placeholder="Enter A Username...">
+          <div class="col text-center">
+            <br>
+            <input id='username-input' type="text" class="form-control-lg" placeholder="Enter A Username">
+            <br><br>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
           </div>
-        <button type="submit" class="btn btn-primary">Sign Up</button>
     `
     contentContainer.appendChild(signUpFormContainer)
     signUpFormListener()
