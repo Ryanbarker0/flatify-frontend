@@ -1,9 +1,5 @@
 const addPlaylistBtn = document.getElementById('add-playlist')
 
-// redirects to empty playlist
-// when add playlist is clicked, check if user is logged in 
-// 
-
 let recentPlaylist = []
 
 const renderAddPlaylistHeader = () => {
