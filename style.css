@@ -6,6 +6,10 @@ body {
     margin-top: 8em;
 }
 
+a {
+    color: white
+}
+
 /* Sidebar */
 #sticky-sidebar {
     margin-top: 3em;
@@ -21,14 +25,14 @@ body {
 }
 
 /* Liked Heart Icon */
-#liked-song-heart {
+.heart {
     color: red;
 }
 
 /* All Songs */
 
 .song-list {
-    color: black;
+    color: white;
     text-align: left;
 }
 

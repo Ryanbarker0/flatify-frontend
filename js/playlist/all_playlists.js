@@ -18,8 +18,15 @@ const renderAllPlaylistsForUsers = playlist => {
     const playlistElement = document.createElement('div')
     playlistElement.dataset.id = `${playlist.id}`
     playlistElement.innerHTML = `
-    <h5 data-id='${playlist.id}'><a href='#'>${playlist.name}</a></h5>
-    <p><i id="like-heart" data-id="${playlist.id}" class="far fa-heart"> Like</i></p>
+
+
+    <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+  <div class="card-body">
+  <h5 data-id='${playlist.id}'><a href='#'>${playlist.name}</a></h5>
+  <p><i id="like-heart" data-id="${playlist.id}" class="far fa-heart"> Like</i></p>
+
+  </div>
+</div>
     `
     playlistContainer.appendChild(playlistElement)
     viewPlaylistListener(playlist)
@@ -52,7 +59,7 @@ const viewPlaylistListener = playlist => {
 const likePlaylistListener = (user, playlist) => {
     const likeBtn = document.querySelector(`i[data-id='${playlist.id}']`)
     likeBtn.addEventListener('click', () => {
-        addLikeClassToHeart(likeBtn)
+        toggleLikeClassToHeart(likeBtn)
         updateUsersPlaylist(user, playlist)
     })
 }
@@ -68,7 +75,7 @@ const checkIfPlaylistIsLiked = () => {
 const matchPlaylistIdWithTargetId = element => {
     findCurrentUserInState().playlists.forEach(playlist => {
         if (playlist.id == parseInt(element.dataset.id)) {
-            addLikeClassToHeart(element)
+            toggleLikeClassToHeart(element)
         }
     })
 }

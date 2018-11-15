@@ -73,8 +73,7 @@ const renderHomepage = () => {
             localPlaylists = playlists
             renderTopPlaylists(getArrayOfPopularPlaylists())
         })
-    getSongs()
-        .then(song => renderAllRecentSongs(song))
+
 })
 }
 
