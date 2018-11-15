@@ -70,10 +70,11 @@ const likePlaylistListener = (user, playlist) => {
 const checkIfPlaylistIsLiked = () => {
     const iTags = document.getElementsByTagName('i')
     const iTagsArray = [...iTags]
-    iTagsArray.forEach(el => {
-        matchPlaylistIdWithTargetId(el)
+    iTagsArray.forEach(element => {
+        matchPlaylistIdWithTargetId(element)
     })
 }
+
 const matchPlaylistIdWithTargetId = element => {
     findCurrentUserInState().playlists.forEach(playlist => {
         if (playlist.id == parseInt(element.dataset.id)) {

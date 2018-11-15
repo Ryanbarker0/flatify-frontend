@@ -70,7 +70,7 @@ const userLoggedIn = () => {
     } else
     contentContainer.innerHTML = `
     <div class="alert alert-danger" role="alert">
-     You must be logged in to add a song
+     You must be logged in to add a song.
       </div>
      `
      

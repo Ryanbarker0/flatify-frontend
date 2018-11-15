@@ -25,7 +25,7 @@ const getAllSongs = () => {
 getSongs()
     .then(songs => {
         renderAllSongs(songs)
-        checkIfElementIsLiked()
+        checkIfSongIsLiked()
     })
 }
 

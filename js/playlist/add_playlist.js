@@ -56,8 +56,11 @@ addPlaylistBtn.addEventListener('click', () => {
         renderAddPlaylistHeader()
         renderNewPlaylistForm()
     } else {
-        alert('You need to Login to access this page.')
-        renderHomepage()
+    contentContainer.innerHTML = `
+    <div class="alert alert-danger" role="alert">
+     You must be logged in to add a playlist.
+      </div>
+     `
     }
 })
 
