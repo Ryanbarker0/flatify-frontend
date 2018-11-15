@@ -41,17 +41,25 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form> -->
-        <button id='login-btn' type="button" class="btn btn-light btn-sm">Login</button>&nbsp;
+        <button id='login-btn' type="button" class="btn btn-light btn-sm">Login</button>
         <button id='logout-btn' type="button" class="btn btn-light hide btn-sm">Logout</button>
         <button id='sign-up-btn' type="button" class="btn btn-light btn-sm">Sign Up</button>
         </div>
       </nav>
       
 
-      <div class="container">
-          <div id='content'>
-
+ 
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-3 px-1 bg-dark position-fixed" id="sticky-sidebar">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis sint optio recusandae laboriosam, libero iusto minus? Soluta, magnam similique. Odio rerum earum ratione sed est blanditiis quis cumque odit id.
+              </div>
+              <div class="col offset-3" id="content">
+                  
+              </div>
           </div>
+      </div>
+        
 
 
 
@@ -65,7 +73,7 @@
     <script defer src="https://sdk.scdn.co/spotify-player.js"></script>
     <script defer src="js/sign_up.js"></script>
     <script defer src="js/login.js"></script>
-    <script defer src="js/playlist/add_playlist.js"></script>
+    <script defer src="js/playlist/new_playlist.js"></script>
     <script defer src="js/playlist/view_playlist.js"></script>
     <script defer src="js/playlist/all_playlists.js"></script>
     <script defer src="js/song/add_song.js"></script>

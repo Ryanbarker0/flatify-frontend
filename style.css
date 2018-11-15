@@ -1,9 +1,15 @@
+/* Body */
+
 body {
     background-color: #282828;
     color: white;
-    margin-top: 6em;
+    margin-top: 8em;
 }
 
+/* Sidebar */
+#sticky-sidebar {
+    margin-top: 3em;
+}
 
 
 .active {
@@ -31,3 +37,10 @@ body {
 #login-btn {
     margin: 0.3em;
 }
+
+/* Titles/Headers */
+/* #playlist-header {
+    padding-bottom: 0.3em;
+} */
+
+

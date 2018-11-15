@@ -1,5 +1,6 @@
 const topPlaylistList = document.getElementById('top-playlist')
 const contentContainer = document.getElementById('content')
+const sidebar = document.getElementById('sticky-sidebar')
 const navbarContainer = document.getElementById('navbarSupportedContent')
 const navbarItems = [...(document.querySelectorAll('.nav-item'))]
 const homeBtn = document.getElementById('home-btn')
@@ -22,6 +23,7 @@ const localPlaylists = {
 
 const createPlaylistHeader = () => {
     const topPlaylistHeader = document.createElement('h2')
+    topPlaylistHeader.classList.add('text-center')
     topPlaylistHeader.innerText = 'Top Playlists'
     topPlaylistHeader.id = 'playlist-header'
     contentContainer.appendChild(topPlaylistHeader)
@@ -50,8 +52,7 @@ const renderUserPlaylists = (user) => {
     <p class="card-text">${playlist.name}</p>
   </div>
 </div>
-        
-        
+    
         
         `
         playlistContainer.appendChild(playlistElement)
@@ -73,12 +74,15 @@ const activateHomepageButton = () => {
 
 const renderHomepage = () => {
     contentContainer.innerHTML = ''
+    // sidebar.innerHTML = ''
     activateHomepageButton()
     getUsers()
         .then(users => {
             state.users = users
             renderAllUserPlaylists(state.users)
         })
+    getSongs()
+        .then(song => renderAllRecentSongs(song))
 }
 
 renderHomepage()
@@ -109,11 +113,45 @@ homeBtn.addEventListener('click', () => { renderHomepage() })
 logoutBtn.addEventListener('click', () => { window.location.reload() })
 
 
+
+
+
+
+
+
 // ======= Recent Songs ========
 
-const createRecentSongsHeader = () => {
-    const recentSongsHeader = document.createElement('h2')
-    recentSongsHeader.innerText = 'Recent Songs'
-    recentSongsHeader.id = 'recent-songs-header'
-    contentContainer.appendChild(recentSongsHeader)
-}
+// const createRecentSongsHeader = () => {
+//     const recentSongsHeader = document.createElement('p')
+//     recentSongsHeader.innerText = 'Recent Songs'
+//     recentSongsHeader.id = 'recent-songs-header'
+//     sidebar.appendChild(recentSongsHeader)
+// }
+
+// const createRecentSongsList = () => {
+//     const recentSongsList = document.createElement('div')
+//     recentSongsList.id = 'recent-songs-list'
+//     sidebar.appendChild(recentSongsList)
+// }
+
+// const renderAllRecentSongs = songs => {
+//     createRecentSongsHeader()
+//     createRecentSongsList()
+//     songs.forEach(song => renderRecentSongs(song))
+// }
+
+
+
+// //WIP
+// const renderRecentSongs = (songs) => {
+//     const recentSongsContainer = document.getElementById('recent-song-list')
+
+//         const recentSongElement = document.createElement('div')
+//         recentSongElement.dataset.id = `${song.id}`
+//         recentSongElement.innerHTML = `
+//         <p>${song.name}</p>
+    
+        
+//         `
+//         recentSongsContainer.appendChild(recentSongElement)
+//     }
