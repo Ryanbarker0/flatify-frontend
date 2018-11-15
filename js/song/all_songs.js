@@ -101,14 +101,27 @@ const addPlaylistElementsToDropDown = (playlist, song) => {
     dropdownMenu.appendChild(dropdownItem)
 }
 
+const checkIfSongIsInPlayList = (playlistId, songId) => {
+    const user = findCurrentUserInState()
+    const foundPlaylist = user.playlists.find(playlist => playlist.id === parseInt(playlistId))
+    const songSearch = foundPlaylist.songs.find(song => song.id === parseInt(songId))
+    if (!!songSearch) {
+        notifyError()
+    } else {
+        createPlaylistSong(playlistId, songId)
+        notifySuccess()
+    }
+}
+
 document.addEventListener('click', event => {
     if (event.target.className === 'menuitem') {
         const playlistId = event.target.dataset.playlist
         const songId = event.target.dataset.song
-        createPlaylistSong(playlistId, songId)
-        notifySuccess()
+        checkIfSongIsInPlayList(playlistId, songId)
     }
 })
+
+
 
 const notifySuccess = () => 
     $.notify({
@@ -125,6 +138,21 @@ const notifySuccess = () =>
             }
         }
     );
+
+const notifyError = () => 
+    $.notify({
+        message: 'You have already added this song.'
+    }, {
+        type: 'danger',
+        offset: 20,
+        spacing: 10,
+        z_index: 1031,
+        delay: 5000,
+        animate: {
+            enter: 'animated fadeInDown',
+            exit: 'animated fadeOutUp'
+        }
+    });
 
 const notLoggedInError = () => {
     errorDiv.innerHTML = ''
