@@ -19,7 +19,7 @@ const renderAllPlaylistsForUsers = user => {
         const playlistElement = document.createElement('div')
         setElementAttributes(playlistElement, playlist, user)
         playlistElement.innerHTML = `
-        <h5 data-id='${playlist.id}'>${playlist.name}</h5>
+        <h5 data-id='${playlist.id}'><a href='#'>${playlist.name}</a></h5>
         <p><i id="like-heart" data-id="${playlist.id}" class="far fa-heart"> Like</i></p>
         `
         playlistContainer.appendChild(playlistElement)
