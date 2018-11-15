@@ -1,4 +1,3 @@
-// add functionality for when an individual playlist is clicked
 const renderPlaylistTitle = playlist => {
     const playlistTitle = document.createElement('h2')
     playlistTitle.innerText = `${playlist.name}`
@@ -19,7 +18,6 @@ const renderEmptyPlaylist = () => {
 
 const renderPlaylistSongs = playlist => {
     const songsContainer = document.createElement('ol')
-    console.log(playlist.songs)
     playlist.songs.forEach(song => {
         const songElement = document.createElement('li')
         songElement.innerHTML = `${song.name} <button data-id="${song.id}">Delete Song</button>`

@@ -52,7 +52,7 @@ const viewPlaylistListener = playlist => {
 const likePlaylistListener = (user, playlist) => {
     const likeBtn = document.querySelector(`i[data-id='${playlist.id}']`)
     likeBtn.addEventListener('click', () => {
-        addLikeClassToHeart(likeBtn)
+        toggleLikeClassToHeart(likeBtn)
         updateUsersPlaylist(user, playlist)
     })
 }
@@ -68,7 +68,7 @@ const checkIfPlaylistIsLiked = () => {
 const matchPlaylistIdWithTargetId = element => {
     findCurrentUserInState().playlists.forEach(playlist => {
         if (playlist.id == parseInt(element.dataset.id)) {
-            addLikeClassToHeart(element)
+            toggleLikeClassToHeart(element)
         }
     })
 }

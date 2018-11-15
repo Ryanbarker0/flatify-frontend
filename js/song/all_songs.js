@@ -10,28 +10,33 @@ const createAllSongsHeader = () => {
 }
 
 
-const renderSong = (song) => {
+const renderSong = (song, user) => {
     const songList = document.createElement('div')
     songList.className = 'song-list'
     songList.innerHTML = `
         <h5 id='${song.id}'>${song.name}</h5>
-        <p>${song.artist} <i id="like-heart" data-id="${song.id}" class="far fa-heart"> Like</i></p>
+        <p id='song-${song.id}'>${song.artist} <i id="like-heart" data-id="${song.id}" class="heart far fa-heart"> Like</i> </p>
         
     `
     contentContainer.appendChild(songList)
+    const songItem = document.getElementById(`song-${song.id}`)
+    if (currentUser.id > 0) {
+        addPlaylistDropDownMenu(songItem, user, song)
+    }
 }
 
 const getAllSongs = () => {
-getSongs()
-    .then(songs => {
-        renderAllSongs(songs)
-        checkIfSongIsLiked()
-    })
+    getSongs()
+        .then(songs => {
+            renderAllSongs(songs)
+            checkIfSongIsLiked()
+        })
 }
 
-
-const renderAllSongs = songs => 
-    songs.forEach(song => renderSong(song))
+const renderAllSongs = songs => {
+    const user = findCurrentUserInState()
+    songs.forEach(song => renderSong(song, user))
+}
 
 allSongsBtn.addEventListener('click', () => {
     contentContainer.innerHTML = ''
@@ -45,42 +50,83 @@ const checkIfSongIsLiked = () => {
     const iTagsArray = [...iTags]
     iTagsArray.forEach(el => {
         matchSongIdWithTargetId(el)
-        })
-    }
+    })
+}
 
 const matchSongIdWithTargetId = element => {
     findCurrentUserInState().songs.forEach(song => {
         if (song.id == parseInt(element.dataset.id)) {
-            addLikeClassToHeart(element)
-        }   
+            toggleLikeClassToHeart(element)
+        }
     })
 }
 
-const addLikeClassToHeart = element => {
-    element.setAttribute('class', "fas fa-heart liked-song")
-    element.setAttribute('id', "liked-song-heart")
+const toggleLikeClassToHeart = element => {
+    element.classList.toggle('fas')
 }
-
-
-
 
 document.addEventListener('click', event => {
 
-     if (currentUser.id === 0) {
-        if (event.target.id === 'like-heart') {
-            notLoggedInError()
-    }
-        } else {
-            if (event.target.id === 'like-heart') {
-            const id = event.target.dataset.id
-            const likedSong = event.target
-            addLikeClassToHeart(likedSong)
-                likeSong(currentUser.id, parseInt(id))
-        }  
+    if (event.target.classList.contains('heart')) {
+        if (!currentUser.id) {
+            return notLoggedInError()
+        }
+
+        const id = event.target.dataset.id
+        const likedSong = event.target
+        toggleLikeClassToHeart(likedSong)
+
+        if (event.target.classList.contains('fas')) {
+            likeSong(currentUser.id, parseInt(id))
+        }
     }
 })
 
+const addPlaylistDropDownMenu = (element, user, song) => {
+    const dropDownContainer = document.createElement('div')
+    dropDownContainer.className = 'dropdown'
+    dropDownContainer.innerHTML = `
+    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Add To Playlist...
+    <span class="caret"></span></button>
+    <ul id='dropdown-menu-${song.id}' class="dropdown-menu" role="menu" aria-labelledby="menu1">
+    </ul>
+    `
+    element.appendChild(dropDownContainer)
+    user.playlists.forEach(playlist => addPlaylistElementsToDropDown(playlist, song))
+}
 
+const addPlaylistElementsToDropDown = (playlist, song) => {
+    const dropdownMenu = document.getElementById(`dropdown-menu-${song.id}`)
+    const dropdownItem = document.createElement('li')
+    dropdownItem.role = 'presentation'
+    dropdownItem.innerHTML = `<a data-song='${song.id}' data-playlist='${playlist.id}' class='menuitem' role="menuitem" tabindex="-1" href="#">${playlist.name}</a>`
+    dropdownMenu.appendChild(dropdownItem)
+}
+
+document.addEventListener('click', event => {
+    if (event.target.className === 'menuitem') {
+        const playlistId = event.target.dataset.playlist
+        const songId = event.target.dataset.song
+        createPlaylistSong(playlistId, songId)
+        notifySuccess()
+    }
+})
+
+const notifySuccess = () => 
+    $.notify({
+        message: 'Song Successfully Added'
+    }, {
+        type: 'success',
+        offset: 20,
+        spacing: 10,
+        z_index: 1031,
+        delay: 5000,
+        animate: {
+        	enter: 'animated fadeInDown',
+            exit: 'animated fadeOutUp'
+            }
+        }
+    );
 
 const notLoggedInError = () => {
     errorDiv.innerHTML = ''
