@@ -36,12 +36,11 @@ const renderAllPlaylistsPage = () => {
     contentContainer.innerHTML = ''
     getPlaylists()
         .then(playlists => {
+            localPlaylists = playlists
             renderAllPlaylists(playlists)
             checkIfPlaylistIsLiked()
         })
 }
-
-const findPlaylistInState = playlist => state.users.forEach(user => user.playlists.find(element => element.id === playlist.id))
 
 const viewPlaylistListener = playlist => {
     const playlistElement = document.querySelector(`h5[data-id='${playlist.id}']`)
@@ -68,7 +67,6 @@ const checkIfPlaylistIsLiked = () => {
 
 const matchPlaylistIdWithTargetId = element => {
     findCurrentUserInState().playlists.forEach(playlist => {
-        console.log(playlist)
         if (playlist.id == parseInt(element.dataset.id)) {
             addLikeClassToHeart(element)
         }
