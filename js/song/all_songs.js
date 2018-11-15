@@ -124,7 +124,7 @@ const notifySuccess = () =>
         z_index: 1031,
         delay: 5000,
         animate: {
-        	enter: 'animated fadeInDown',
+            enter: 'animated fadeInDown',
             exit: 'animated fadeOutUp'
             }
         }
