@@ -47,7 +47,7 @@ const updateUsersPlaylist = (user, mostRecentPlaylist) =>
             user_id: user.id,
             playlist_id: mostRecentPlaylist.id
         })
-    }).then(resp => resp.json())
+    }).then(resp => resp.json(), console.log('created'))
 
 
 

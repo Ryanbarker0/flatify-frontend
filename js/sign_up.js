@@ -62,7 +62,7 @@ const updateNavbar = () => {
 
 signUpBtn.addEventListener('click', () => {
     contentContainer.innerHTML = ''
-    findAndRemoveActiveNavButton()
+    // findAndRemoveActiveNavButton()
     renderSignUpHeader()
     renderSignUpForm()
 })

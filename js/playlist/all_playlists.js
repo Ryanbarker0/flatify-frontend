@@ -13,34 +13,30 @@ const createAllPlaylistList = () => {
     contentContainer.appendChild(allPlaylistList)
 }
 
-const renderAllPlaylistsForUsers = user => {
+const renderAllPlaylistsForUsers = playlist => {
     const playlistContainer = document.getElementById('playlist-list')
-    user.playlists.forEach(playlist => {
-        const playlistElement = document.createElement('div')
-        setElementAttributes(playlistElement, playlist, user)
-        playlistElement.innerHTML = `
-        <h5 data-id='${playlist.id}'><a href='#'>${playlist.name}</a></h5>
-        <p><i id="like-heart" data-id="${playlist.id}" class="far fa-heart"> Like</i></p>
-        `
-        playlistContainer.appendChild(playlistElement)
-        viewPlaylistListener(playlist)
-        likePlaylistListener(user, playlist)
-
-    })
+    const playlistElement = document.createElement('div')
+    playlistElement.dataset.id = `${playlist.id}`
+    playlistElement.innerHTML = `
+    <h5 data-id='${playlist.id}'><a href='#'>${playlist.name}</a></h5>
+    <p><i id="like-heart" data-id="${playlist.id}" class="far fa-heart"> Like</i></p>
+    `
+    playlistContainer.appendChild(playlistElement)
+    viewPlaylistListener(playlist)
+    likePlaylistListener(findCurrentUserInState(), playlist)
 }
 
-const renderAllPlaylists = users => {
+const renderAllPlaylists = playlists => {
     createAllPlaylistHeader()
     createPlaylistList()
-    users.forEach(user => renderAllPlaylistsForUsers(user))
+    playlists.forEach(playlist => renderAllPlaylistsForUsers(playlist))
 }
 
 const renderAllPlaylistsPage = () => {
     contentContainer.innerHTML = ''
-    getUsers()
-        .then(users => {
-            state.users = users
-            renderAllPlaylists(state.users)
+    getPlaylists()
+        .then(playlists => {
+            renderAllPlaylists(playlists)
             checkIfPlaylistIsLiked()
         })
 }
@@ -54,14 +50,9 @@ const viewPlaylistListener = playlist => {
     })
 }
 
-const setElementAttributes = (element, playlist, user) => {
-    element.dataset.id = `${playlist.id}`
-    element.dataset.user = `${user.id}`
-}
-
 const likePlaylistListener = (user, playlist) => {
     const likeBtn = document.querySelector(`i[data-id='${playlist.id}']`)
-    likeBtn.addEventListener('click', event => {
+    likeBtn.addEventListener('click', () => {
         addLikeClassToHeart(likeBtn)
         updateUsersPlaylist(user, playlist)
     })
@@ -77,6 +68,7 @@ const checkIfPlaylistIsLiked = () => {
 
 const matchPlaylistIdWithTargetId = element => {
     findCurrentUserInState().playlists.forEach(playlist => {
+        console.log(playlist)
         if (playlist.id == parseInt(element.dataset.id)) {
             addLikeClassToHeart(element)
         }

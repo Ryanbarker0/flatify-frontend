@@ -43,7 +43,7 @@ const loginFormListener = () => {
 
 loginBtn.addEventListener('click', () => {
     contentContainer.innerHTML = ''
-    findAndRemoveActiveNavButton()
+    // findAndRemoveActiveNavButton()
     renderLoginHeader()
     renderLoginForm()
 })
