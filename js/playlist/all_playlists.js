@@ -16,11 +16,15 @@ const createAllPlaylistList = () => {
 const renderAllPlaylistsForUsers = user => {
     const playlistContainer = document.getElementById('playlist-list')
     user.playlists.forEach(playlist => {
-        const playlistElement = document.createElement('li')
+        const playlistElement = document.createElement('div')
         setElementAttributes(playlistElement, playlist, user)
-        playlistElement.innerText = `${playlist.name}`
+        playlistElement.innerHTML = `
+        <h5 data-id='${playlist.id}'><a href='#'>${playlist.name}</a></h5>
+        <p><i id="like-heart" data-id="${playlist.id}" class="far fa-heart"> Like</i></p>
+        `
         playlistContainer.appendChild(playlistElement)
         viewPlaylistListener(playlist)
+        likePlaylistListener(user, playlist)
 
     })
 }
@@ -37,22 +41,46 @@ const renderAllPlaylistsPage = () => {
         .then(users => {
             state.users = users
             renderAllPlaylists(state.users)
+            checkIfPlaylistIsLiked()
         })
 }
 
 const findPlaylistInState = playlist => state.users.forEach(user => user.playlists.find(element => element.id === playlist.id))
 
 const viewPlaylistListener = playlist => {
-    const playlistElement = document.querySelector(`li[data-id='${playlist.id}']`)
+    const playlistElement = document.querySelector(`h5[data-id='${playlist.id}']`)
     playlistElement.addEventListener('click', () => {
             renderPlaylist(playlist)
     })
-
 }
 
 const setElementAttributes = (element, playlist, user) => {
     element.dataset.id = `${playlist.id}`
     element.dataset.user = `${user.id}`
+}
+
+const likePlaylistListener = (user, playlist) => {
+    const likeBtn = document.querySelector(`i[data-id='${playlist.id}']`)
+    likeBtn.addEventListener('click', event => {
+        addLikeClassToHeart(likeBtn)
+        updateUsersPlaylist(user, playlist)
+    })
+}
+
+const checkIfPlaylistIsLiked = () => {
+    const iTags = document.getElementsByTagName('i')
+    const iTagsArray = [...iTags]
+    iTagsArray.forEach(element => {
+        matchPlaylistIdWithTargetId(element)
+    })
+}
+
+const matchPlaylistIdWithTargetId = element => {
+    findCurrentUserInState().playlists.forEach(playlist => {
+        if (playlist.id == parseInt(element.dataset.id)) {
+            addLikeClassToHeart(element)
+        }
+    })
 }
 
 allPlaylistsBtn.addEventListener('click', () => {
