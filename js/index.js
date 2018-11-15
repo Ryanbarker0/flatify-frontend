@@ -28,17 +28,32 @@ const createPlaylistHeader = () => {
 }
 
 const createPlaylistList = () => {
-    const topPlaylistList = document.createElement('ul')
+    const topPlaylistList = document.createElement('div')
     topPlaylistList.id = 'playlist-list'
     contentContainer.appendChild(topPlaylistList)
 }
 
+//WIP
 const renderUserPlaylists = (user) => {
     const playlistContainer = document.getElementById('playlist-list')
     user.playlists.forEach(playlist => {
-        const playlistElement = document.createElement('li')
+        playlist
+        const playlistElement = document.createElement('div')
         playlistElement.dataset.id = `${user.id}`
-        playlistElement.innerText = `${playlist.name}`
+        playlistElement.innerHTML = `
+        
+
+<div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+  <div class="card-header">${user.username}'s Playlist</div>
+  <div class="card-body">
+    <h4 class="card-title">${playlist.name}</h4>
+    <p class="card-text">${playlist.name}</p>
+  </div>
+</div>
+        
+        
+        
+        `
         playlistContainer.appendChild(playlistElement)
     })
 }
@@ -92,3 +107,13 @@ const addElement = (parent, element) => {
 
 homeBtn.addEventListener('click', () => { renderHomepage() })
 logoutBtn.addEventListener('click', () => { window.location.reload() })
+
+
+// ======= Recent Songs ========
+
+const createRecentSongsHeader = () => {
+    const recentSongsHeader = document.createElement('h2')
+    recentSongsHeader.innerText = 'Recent Songs'
+    recentSongsHeader.id = 'recent-songs-header'
+    contentContainer.appendChild(recentSongsHeader)
+}

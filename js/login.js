@@ -14,6 +14,7 @@ const renderLoginForm = () => {
             <input id='username-input' type="text" class="form-control" placeholder="Enter A Username...">
           </div>
         <button type="submit" class="btn btn-primary">Login</button>
+        
     `
     contentContainer.appendChild(loginFormContainer)
     loginFormListener()
