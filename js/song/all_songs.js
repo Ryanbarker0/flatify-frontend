@@ -26,11 +26,11 @@ const renderSong = (song, user) => {
 }
 
 const getAllSongs = () => {
-getSongs()
-    .then(songs => {
-        renderAllSongs(songs)
-        checkIfSongIsLiked()
-    })
+    getSongs()
+        .then(songs => {
+            renderAllSongs(songs)
+            checkIfSongIsLiked()
+        })
 }
 
 const renderAllSongs = songs => {
@@ -50,14 +50,18 @@ const checkIfSongIsLiked = () => {
     const iTagsArray = [...iTags]
     iTagsArray.forEach(el => {
         matchSongIdWithTargetId(el)
-        })
-    }
+    })
+}
 
 const matchSongIdWithTargetId = element => {
     findCurrentUserInState().songs.forEach(song => {
         if (song.id == parseInt(element.dataset.id)) {
             toggleLikeClassToHeart(element)
+<<<<<<< HEAD
         }   
+=======
+        }
+>>>>>>> 8823b1592e30f09a1355d6a073b25dfef7797bfe
     })
 }
 
@@ -66,6 +70,7 @@ const toggleLikeClassToHeart = element => {
 }
 
 document.addEventListener('click', event => {
+<<<<<<< HEAD
        
     if (event.target.classList.contains('heart')) {
        if (!currentUser.id) { return notLoggedInError() }
@@ -110,6 +115,54 @@ document.addEventListener('click', event => {
     }
 })
 
+=======
+
+    if (event.target.classList.contains('heart')) {
+        if (!currentUser.id) {
+            return notLoggedInError()
+        }
+
+        const id = event.target.dataset.id
+        const likedSong = event.target
+        toggleLikeClassToHeart(likedSong)
+
+        if (event.target.classList.contains('fas')) {
+            likeSong(currentUser.id, parseInt(id))
+        }
+    }
+})
+
+const addPlaylistDropDownMenu = (element, user, song) => {
+    const dropDownContainer = document.createElement('div')
+    dropDownContainer.className = 'dropdown'
+    dropDownContainer.innerHTML = `
+    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Add To Playlist...
+    <span class="caret"></span></button>
+    <ul id='dropdown-menu-${song.id}' class="dropdown-menu" role="menu" aria-labelledby="menu1">
+    </ul>
+    `
+    element.appendChild(dropDownContainer)
+    user.playlists.forEach(playlist => addPlaylistElementsToDropDown(playlist, song))
+}
+
+const addPlaylistElementsToDropDown = (playlist, song) => {
+    const dropdownMenu = document.getElementById(`dropdown-menu-${song.id}`)
+    const dropdownItem = document.createElement('li')
+    dropdownItem.role = 'presentation'
+    dropdownItem.innerHTML = `<a data-song='${song.id}' data-playlist='${playlist.id}' class='menuitem' role="menuitem" tabindex="-1" href="#">${playlist.name}</a>`
+    dropdownMenu.appendChild(dropdownItem)
+}
+
+document.addEventListener('click', event => {
+    if (event.target.className === 'menuitem') {
+        const playlistId = event.target.dataset.playlist
+        const songId = event.target.dataset.song
+        createPlaylistSong(playlistId, songId)
+        notifySuccess()
+    }
+})
+
+>>>>>>> 8823b1592e30f09a1355d6a073b25dfef7797bfe
 const notifySuccess = () => 
     $.notify({
         message: 'Song Successfully Added'
@@ -120,7 +173,11 @@ const notifySuccess = () =>
         z_index: 1031,
         delay: 5000,
         animate: {
+<<<<<<< HEAD
             enter: 'animated fadeInDown',
+=======
+        	enter: 'animated fadeInDown',
+>>>>>>> 8823b1592e30f09a1355d6a073b25dfef7797bfe
             exit: 'animated fadeOutUp'
             }
         }

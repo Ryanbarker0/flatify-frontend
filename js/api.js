@@ -1,6 +1,7 @@
 const usersURL = `http://localhost:3000/api/v1/users`
 const playlistsURL = `http://localhost:3000/api/v1/playlists`
 const userPlaylistsURL = `http://localhost:3000/api/v1/user_playlists`
+const playlistSongURL = `http://localhost:3000/api/v1/playlist_songs`
 const songsURL = `http://localhost:3000/api/v1/songs`
 const likesURL = `http://localhost:3000/api/v1/likes`
 
@@ -49,6 +50,17 @@ const updateUsersPlaylist = (user, mostRecentPlaylist) =>
         })
     }).then(resp => resp.json())
 
+const createPlaylistSong = (playlistId, songId) =>
+    fetch(playlistSongURL, {
+        method: 'POST',
+        headers: {
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({
+            song_id: songId,
+            playlist_id: playlistId
+        })
+    }).then(resp => resp.json())
 
 
 
