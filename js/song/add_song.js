@@ -8,6 +8,7 @@ let addedSong = []
 
 const renderAddSongHeader = () => {
     const addSongFormHeader = document.createElement('h2')
+    addSongFormHeader.classList.add('text-center')
     addSongFormHeader.classList.add('add-song-title')
     addSongFormHeader.innerText = 'Add Song'
     contentContainer.appendChild(addSongFormHeader)
@@ -18,12 +19,14 @@ const renderAddSongForm = () => {
     addSongContainer.id = 'add-song-form'
     addSongContainer.innerHTML = `
         <div class="form-row">
-          <div class="col">
-            <input id='artist-name-input' type="text" class="form-control" placeholder="Enter An Artist...">
-            <input id='song-name-input' type="text" class="form-control" placeholder="Enter A Song...">
-            <input id='song-genre-input' type="text" class="form-control" placeholder="Enter A Genre...">
+          <div class="col text-center">
+            <br>
+            <input id='artist-name-input' type="text" class="form-control-lg" placeholder="Enter An Artist..."><br><br>
+            <input id='song-name-input' type="text" class="form-control-lg" placeholder="Enter A Song..."><br><br>
+            <input id='song-genre-input' type="text" class="form-control-lg" placeholder="Enter A Genre...">
+            <br><br>
+            <button type="submit" class="btn btn-primary">Add Song</button>
           </div>
-        <button type="submit" class="btn btn-primary">Add Song</button>
     `
     contentContainer.appendChild(addSongContainer)
     addSongFormListener() 

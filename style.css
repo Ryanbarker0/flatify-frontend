@@ -1,14 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+
 /* Body */
 
 body {
     background-color: #282828;
     color: white;
     margin-top: 8em;
+    font-family: 'Roboto', sans-serif;
 }
 
+/* Global */
+
 a {
-    color: white
+    color: red
 }
+
+
+::-webkit-input-placeholder {
+    color: #808080;
+    text-align: center;
+ 
+ }
+ 
+ :-moz-placeholder {
+    color: #808080;
+    text-align: center;
+ 
+ }
+
+/* h1, h2, h3, h4, h5, h6{
+    font-family: 'Roboto', sans-serif;
+}
+ */
+
 
 /* Sidebar */
 #sticky-sidebar {
@@ -28,6 +53,10 @@ a {
 .heart {
     color: red;
 }
+
+/* .far {
+    color: white
+} */
 
 /* All Songs */
 

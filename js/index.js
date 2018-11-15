@@ -1,3 +1,4 @@
+const formContainer = document.getElementById('formContainer')
 const topPlaylistList = document.getElementById('top-playlist')
 const contentContainer = document.getElementById('content')
 const sidebar = document.getElementById('sticky-sidebar')
