@@ -22,11 +22,12 @@ const renderSong = (song, user, usersLikes) => {
     contentContainer.appendChild(songList)
     const songItem = document.getElementById(`song-${song.id}`)
     const likeBtnTag = document.querySelector(`i[data-id='${song.id}']`)
-    const foundLike = usersLikes.find(element => element.song_id === parseInt(song.id))
-    if (!!foundLike) {
+    if (currentUser > 0) {
+        const foundLike = usersLikes.find(element => element.song_id === parseInt(song.id))
+        if (!!foundLike) {
         likeBtnTag.dataset.likeId = `${foundLike.id}`
+        }
     }
-    console.log(usersLikes)
     if (currentUser.id > 0) {
         addPlaylistDropDownMenu(songItem, user, song)
     }
@@ -46,8 +47,12 @@ const getAllSongs = () => {
 
 const renderAllSongs = songs => {
     const user = findCurrentUserInState()
-    const usersLikes = findLikesOfCurrentUser()
-    songs.forEach(song => renderSong(song, user, usersLikes))
+    const usersLikes = () => {
+        if (currentUser > 0) {
+        return findLikesOfCurrentUser()
+        }
+    }
+    songs.forEach(song => renderSong(song, user, usersLikes()))
 }
 
 const findLikesOfCurrentUser = () => localLikes.filter(element => (element.user_id == findCurrentUserInState().id))
