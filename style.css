@@ -29,6 +29,10 @@ a {
  
  }
 
+/* Nav Bar */
+.nav-item {
+    padding-top: 1.2em;
+}
 
 
 
@@ -105,7 +109,7 @@ a {
     color: #fff;
     font-size: 2rem;
     height: 10rem;
-    transition: all .8s;
+    transition: all .3s;
     position: absolute;
     top: 0;
     left: 0;

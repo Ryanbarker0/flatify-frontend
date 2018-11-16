@@ -34,7 +34,6 @@ const createPlaylistList = () => {
 
 
 const renderTopPlaylist = playlist => {
-    console.log(playlist.name.song);
     const playlistContainer = document.getElementById('playlist-list')
     const playlistElement = document.createElement('div')
     playlistElement.innerHTML = `
