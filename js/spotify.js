@@ -1,16 +1,16 @@
 const spotifySearchURL = `https://api.spotify.com/v1/search`
-const token = `BQAMiUQUhjM7qiXj31Oox2sw2k9HjCuiM2c6GwP7LtP1L_KWAL535tqWA5DKSv6JfP27alGB8iFCpqG4rOXgiKI4rwEi27SVteWbvEtPwy7odaQUqPHvLDiLG_r9jVdO7SmB8XjsBt545bdjuXY34vSsVazF81yITRobMaf4ZPGqkJJn610NMiewSkII93sotJCjIDdgtzaB_ydZjg6kd2XQext1KM6pNQ4igM7GfmJxFVhm0f6x3TAFL_mCbh_cX7AXF46o1rXqsOtdS5Q`
+const token = `BQDyHNY3uyZp7eaGRxyMulVCgb9fl-efyuulO4WXAljlNmelvg8igDgif4UiEQq0oMURB4IkHijS0Fbi2HoQMh39-EeK2natpGFdHnh9r2R2jG5TPK8MNWqBL2Xiyp_zaW8YjmI9dnp72ZtvuCGxe6951hfb_IIzSE1ciRl2rsGgNJ_bdTI6uetpR-7hdn3J8ez8hTgXX77ZSfk1WL-t29WNQEFQBparJLUl1tk_mK3cGPKzn2MzE6elx9Pa2j_4Aw0Kigz-EBAoHgGrdg0`
 
-const trackSearchRequest = query => {
-    fetch(`${spotifySearchURL}?q=${query}type=track&market=GB&limit=10`, {
+const trackSearchRequest = query => 
+    fetch(`${spotifySearchURL}?q=${query}&type=track&market=GB&limit=10&offset=5`, {
         method: 'GET',
         headers: {
             "Accept":"application/json",
             "Content-Type":"application/json",
             "Authorization":`Bearer ${token}`
         }
-    })
-} 
+    }).then(resp => resp.json())
+
 
 const initializeSpotifySDK = () =>
     window.onSpotifyWebPlaybackSDKReady = () => {

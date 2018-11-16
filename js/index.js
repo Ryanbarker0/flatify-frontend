@@ -6,6 +6,7 @@ const navbarItems = [...(document.querySelectorAll('.nav-item'))]
 const homeBtn = document.getElementById('home-btn')
 const logoutBtn = document.getElementById('logout-btn')
 const navbarBrand = document.getElementById('brand')
+const searchBtn = document.getElementById('search')
 
 const state = {
     users: []
@@ -108,6 +109,7 @@ const addElement = (parent, element) => {
 
 homeBtn.addEventListener('click', () => { renderHomepage() })
 logoutBtn.addEventListener('click', () => { window.location.reload() })
+searchBtn.addEventListener('click', () => { renderSearchPage() })
 
 const playListCardListener = playlist => {
     const playlistCard = document.getElementById(`${playlist.id}`)
