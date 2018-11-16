@@ -4,7 +4,7 @@ const results = {
 
 const renderSearchHeader = () => {
     const searchHeader = document.createElement('h2')
-    searchHeader.innerText = 'Search'
+    searchHeader.innerText = 'Song Search'
     contentContainer.appendChild(searchHeader)
 }
 
