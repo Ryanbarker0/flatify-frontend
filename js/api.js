@@ -104,5 +104,14 @@ const likeSong = (user, likedSong) =>
         })
     }).then(resp => resp.json())
 
+const getLikes = async () => {
+    const response = await fetch(likesURL)
+    return response.json()
+}
+
+const deleteLike = likeId =>
+    fetch(`${likesURL}/${likeId}`, {
+        method: 'DELETE'
+    }).then(resp => resp.json())
 
 

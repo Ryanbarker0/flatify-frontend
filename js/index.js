@@ -5,7 +5,7 @@ const navbarContainer = document.getElementById('navbarSupportedContent')
 const navbarItems = [...(document.querySelectorAll('.nav-item'))]
 const homeBtn = document.getElementById('home-btn')
 const logoutBtn = document.getElementById('logout-btn')
-
+const navbarBrand = document.getElementById('brand')
 
 const state = {
     users: []
@@ -153,6 +153,8 @@ const sortByPopularAndRemoveDuplicates = array => {
     }
     return uniques.sort(compareFrequency);
 }
+
+navbarBrand.addEventListener('click', () => renderHomepage())
 
 renderHomepage()
 

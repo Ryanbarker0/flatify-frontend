@@ -1,6 +1,7 @@
 const allSongsBtn = document.getElementById('all-songs-btn')
 const errorDiv = document.createElement('div')
 
+let localLikes = []
 
 const createAllSongsHeader = () => {
     const allSongsHeader = document.createElement('h2')
@@ -10,7 +11,7 @@ const createAllSongsHeader = () => {
 }
 
 
-const renderSong = (song, user) => {
+const renderSong = (song, user, usersLikes) => {
     const songList = document.createElement('div')
     songList.className = 'song-list'
     songList.innerHTML = `
@@ -20,6 +21,12 @@ const renderSong = (song, user) => {
     `
     contentContainer.appendChild(songList)
     const songItem = document.getElementById(`song-${song.id}`)
+    const likeBtnTag = document.querySelector(`i[data-id='${song.id}']`)
+    const foundLike = usersLikes.find(element => element.song_id === parseInt(song.id))
+    if (!!foundLike) {
+        likeBtnTag.dataset.likeId = `${foundLike.id}`
+    }
+    console.log(usersLikes)
     if (currentUser.id > 0) {
         addPlaylistDropDownMenu(songItem, user, song)
     }
@@ -28,15 +35,22 @@ const renderSong = (song, user) => {
 const getAllSongs = () => {
     getSongs()
         .then(songs => {
+            getLikes()
+                .then(likes => {
+                 localLikes = likes
             renderAllSongs(songs)
             checkIfSongIsLiked()
+            })
         })
 }
 
 const renderAllSongs = songs => {
     const user = findCurrentUserInState()
-    songs.forEach(song => renderSong(song, user))
+    const usersLikes = findLikesOfCurrentUser()
+    songs.forEach(song => renderSong(song, user, usersLikes))
 }
+
+const findLikesOfCurrentUser = () => localLikes.filter(element => (element.user_id == findCurrentUserInState().id))
 
 allSongsBtn.addEventListener('click', () => {
     contentContainer.innerHTML = ''
@@ -71,12 +85,25 @@ document.addEventListener('click', event => {
        if (!currentUser.id) { return notLoggedInError() }
        
        const id = event.target.dataset.id
+       const likeId = event.target.dataset.likeId
        const likedSong = event.target
        toggleLikeClassToHeart(likedSong)
 
        if (event.target.classList.contains('fas')) { 
            likeSong(currentUser.id, parseInt(id))
-       }
+            .then(getLikes()
+                    .then(likes => {
+                        localLikes = likes
+                    })
+            )
+       } else {
+            deleteLike(likeId)
+            .then(getLikes()
+                .then(likes => {
+                    localLikes = likes
+                })
+            ) 
+        }
     }  
 })
 
