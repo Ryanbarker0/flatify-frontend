@@ -1,7 +1,6 @@
 const formContainer = document.getElementById('formContainer')
 const topPlaylistList = document.getElementById('top-playlist')
 const contentContainer = document.getElementById('content')
-const sidebar = document.getElementById('sticky-sidebar')
 const navbarContainer = document.getElementById('navbarSupportedContent')
 const navbarItems = [...(document.querySelectorAll('.nav-item'))]
 const homeBtn = document.getElementById('home-btn')
@@ -29,22 +28,28 @@ const createPlaylistHeader = () => {
 const createPlaylistList = () => {
     const topPlaylistList = document.createElement('div')
     topPlaylistList.id = 'playlist-list'
+    // topPlaylistList.classList.add('row')
     contentContainer.appendChild(topPlaylistList)
 }
 
-//WIP
+
 const renderTopPlaylist = playlist => {
+    console.log(playlist.name.song);
     const playlistContainer = document.getElementById('playlist-list')
     const playlistElement = document.createElement('div')
     playlistElement.innerHTML = `
-<div id="${playlist.id}" class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-  <div class="card-body">
-    <h4 class="card-title">${playlist.name}</h4>
-    <p class="card-text">${playlist.name}</p>
-  </div>
-</div>
-    
-        
+    <div id="${playlist.id}" class=" ">
+    <div class=" col-md-6 col-lg-4">
+      <div class="thecard">
+        <div class="thecard__side thecard__side--front text-center">
+        <h4>${playlist.name}</h4>
+        </div>
+        <div class="thecard__side thecard__side--back text-center">
+          <h4>Songs</h4>
+          <p>Suck Me</p>
+        </div>
+      </div>
+    </div>  
         `
         playlistContainer.appendChild(playlistElement)
         playListCardListener(playlist)
@@ -65,17 +70,19 @@ const activateHomepageButton = () => {
 
 const renderHomepage = () => {
     contentContainer.innerHTML = ''
-    // sidebar.innerHTML = ''
     activateHomepageButton()
+    
     getUsers()
-        .then(users => {
-            state.users = users
-    getPlaylists()
+    .then(users => {
+        state.users = users
+        getPlaylists()
         .then(playlists => {
             localPlaylists = playlists
             renderTopPlaylists(getArrayOfPopularPlaylists())
         })
     })
+    
+    renderSidebar()
 }
 
 const findCurrentUserInState = () => state.users.find(user => user.id === currentUser.id)
@@ -150,3 +157,6 @@ const sortByPopularAndRemoveDuplicates = array => {
 navbarBrand.addEventListener('click', () => renderHomepage())
 
 renderHomepage()
+
+
+
