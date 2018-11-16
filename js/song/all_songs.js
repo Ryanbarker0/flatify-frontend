@@ -22,16 +22,8 @@ const renderSong = (song, user, usersLikes) => {
     contentContainer.appendChild(songList)
     const songItem = document.getElementById(`song-${song.id}`)
     const likeBtnTag = document.querySelector(`i[data-id='${song.id}']`)
-    // if (currentUser > 0) {
-    //     const foundLike = usersLikes.find(element => element.song_id === parseInt(song.id))
-    //     console.log(foundLike)
-    //     if (!!foundLike) {
-    //     likeBtnTag.dataset.likeId = `${foundLike.id}`
-    //     }
-    // }
     if (currentUser.id > 0) {
         const foundLike = usersLikes.find(element => element.song_id === parseInt(song.id))
-        console.log(foundLike)
         if (!!foundLike) {
             likeBtnTag.dataset.likeId = `${foundLike.id}`
         }
@@ -41,15 +33,15 @@ const renderSong = (song, user, usersLikes) => {
 
 const getAllSongs = () => {
     getSongs()
-        .then(songs => {
-            getLikes()
-                .then(likes => {
-                 localLikes = likes
+    .then(songs => {
+        getLikes()
+        .then(likes => {
+            localLikes = likes
             const usersLikes = () => {
-                    if (currentUser.id > 0) {
-                        return findLikesOfCurrentUser()
-                    }
+                if (currentUser.id > 0) {
+                    return findLikesOfCurrentUser()
                 }
+            }
             renderAllSongs(songs, usersLikes())
             checkIfSongIsLiked()
             })
@@ -61,13 +53,14 @@ const renderAllSongs = (songs, usersLikes) => {
     songs.forEach(song => renderSong(song, user, usersLikes))
 }
 
+
+
 const findLikesOfCurrentUser = () => localLikes.filter(element => (element.user_id == findCurrentUserInState().id))
 
 allSongsBtn.addEventListener('click', () => {
     contentContainer.innerHTML = ''
     getAllSongs()
     createAllSongsHeader()
-    // renderAllSongs()
     })
 
 const checkIfSongIsLiked = () => {
@@ -162,8 +155,6 @@ document.addEventListener('click', event => {
         checkIfSongIsInPlayList(playlistId, songId)
     }
 })
-
-
 
 const notifySuccess = () => 
     $.notify({

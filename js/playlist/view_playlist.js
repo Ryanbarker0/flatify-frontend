@@ -1,5 +1,22 @@
+let localPlaylistSongs = []
+
+const storePlaylistSongsLocally = () => {
+    getPlaylistSongs()
+    .then(playlistSongs => {
+        localPlaylistSongs = playlistSongs
+    })
+}
+
+const findSongsOfCurrentPlaylist = () => {
+    const playlistHeader = document.getElementById('playlist-head')
+    return localPlaylistSongs.filter(element => (element.playlist_id == playlistHeader.dataset.id))
+}
+
+
 const renderPlaylistTitle = playlist => {
     const playlistTitle = document.createElement('h2')
+    playlistTitle.id = `playlist-head`
+    playlistTitle.dataset.id = `${playlist.id}`
     playlistTitle.innerText = `${playlist.name}`
     contentContainer.appendChild(playlistTitle)
 }
@@ -18,12 +35,20 @@ const renderEmptyPlaylist = () => {
 
 const renderPlaylistSongs = playlist => {
     const songsContainer = document.createElement('ol')
+    contentContainer.appendChild(songsContainer)
     playlist.songs.forEach(song => {
         const songElement = document.createElement('li')
-        songElement.innerHTML = `${song.name} <button data-id="${song.id}">Delete Song</button>`
-        songsContainer.appendChild(songElement)
+        songElement.id = `${song.id}`
+        if (!!currentUser.id) { 
+            songElement.innerHTML = `${song.name} <button id='delete-btn' data-id="${song.id}">Delete Song</button>`
+            songsContainer.appendChild(songElement)
+            deleteBtnListener(songElement, song)
+        } else {
+            songElement.innerHTML = `${song.name}`
+            songsContainer.appendChild(songElement)
+
+        }    
     })
-    contentContainer.appendChild(songsContainer)
 }
 
 const addSongsListener = () => {
@@ -43,7 +68,17 @@ const renderPlaylist = playlist => {
     renderPlaylistTitle(playlist)
     if (playlist.songs.length > 0) {
         renderPlaylistSongs(playlist)
+        storePlaylistSongsLocally()
     } else {
         renderEmptyPlaylist()
     }
-}   
+}  
+
+const deleteBtnListener = (songElement, song) => {
+    const deleteBtn = document.querySelector(`button[data-id='${song.id}']`)
+    deleteBtn.addEventListener('click', event => {
+        const playlistSong = findSongsOfCurrentPlaylist().find(element => element.song_id == songElement.id)
+        deletePlaylistSong(playlistSong)
+        event.target.parentElement.remove()
+    })
+}
