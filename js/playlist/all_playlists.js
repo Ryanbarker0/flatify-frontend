@@ -8,7 +8,7 @@ const createAllPlaylistHeader = () => {
 }
 
 const createAllPlaylistList = () => {
-    const allPlaylistList = document.createElement('ul')
+    const allPlaylistList = document.createElement('div')
     allPlaylistList.id = 'playlist-list'
     contentContainer.appendChild(allPlaylistList)
 }
@@ -16,17 +16,21 @@ const createAllPlaylistList = () => {
 const renderAllPlaylistsForUsers = playlist => {
     const playlistContainer = document.getElementById('playlist-list')
     const playlistElement = document.createElement('div')
+    playlistElement.classList.add('col-md-4')
     playlistElement.dataset.id = `${playlist.id}`
     playlistElement.innerHTML = `
 
 
-    <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-  <div class="card-body">
-  <h5 data-id='${playlist.id}'><a href='#'>${playlist.name}</a></h5>
-  <p><i id="like-heart" data-id="${playlist.id}" class="far fa-heart"> Like</i></p>
-
-  </div>
-</div>
+    <div id="${playlist.id}" class="">
+    <div class="thecard">
+        <div class="thecard__side thecard__side--front text-center">
+            <h5 class='card-title' data-id='${playlist.id}'>${playlist.name}</h5>
+        </div>
+        <div class="thecard__side thecard__side--back text-center">
+            <h5 class='card-title'>${playlist.name}</h5>
+            <i id="like-heart" data-id="${playlist.id}" class="far fa-heart"> Like</i>
+        </div>
+    </div>
     `
     playlistContainer.appendChild(playlistElement)
     viewPlaylistListener(playlist)
@@ -58,6 +62,7 @@ const viewPlaylistListener = playlist => {
 
 const likePlaylistListener = (user, playlist) => {
     const likeBtn = document.querySelector(`i[data-id='${playlist.id}']`)
+    console.log(likeBtn);
     likeBtn.addEventListener('click', () => {
         toggleLikeClassToHeart(likeBtn)
         updateUsersPlaylist(user, playlist)

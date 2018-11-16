@@ -29,27 +29,40 @@ const createPlaylistHeader = () => {
 const createPlaylistList = () => {
     const topPlaylistList = document.createElement('div')
     topPlaylistList.id = 'playlist-list'
-    // topPlaylistList.classList.add('row')
+    topPlaylistList.classList.add('row')
+    topPlaylistList.classList.add('container')
     contentContainer.appendChild(topPlaylistList)
 }
+
+// const getSongsFromPlaylist = (playlist) => {
+//     playlist.songs
+//     getSongsFromPlaylist.forEach(song => song.name)
+//     console.log(getSongsFromPlaylist);
+// } 
+
 
 
 const renderTopPlaylist = playlist => {
     const playlistContainer = document.getElementById('playlist-list')
     const playlistElement = document.createElement('div')
+
+    // const getSongsFromPlaylist = playlist.songs
+
+    // console.log(getSongsFromPlaylist.length)
+
+    playlistElement.classList.add('col-md-4')
     playlistElement.innerHTML = `
-    <div id="${playlist.id}" class=" ">
-    <div class=" col-md-6 col-lg-4">
+
+    <div id="${playlist.id}" class="">
       <div class="thecard">
         <div class="thecard__side thecard__side--front text-center">
-        <h4>${playlist.name}</h4>
+            <h5 class='card-title'>${playlist.name}</h5>
         </div>
         <div class="thecard__side thecard__side--back text-center">
-          <h4>Songs</h4>
-          <p>Suck Me</p>
+            <h6>Songs</h6>
+
         </div>
       </div>
-    </div>  
         `
         playlistContainer.appendChild(playlistElement)
         playListCardListener(playlist)
@@ -59,6 +72,7 @@ const renderTopPlaylists = playlists => {
     createPlaylistHeader()
     createPlaylistList()
     playlists.forEach(playlist => renderTopPlaylist(playlist))
+
 }
 
 const activateHomepageButton = () => {

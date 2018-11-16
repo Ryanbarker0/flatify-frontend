@@ -38,8 +38,9 @@ a {
 
 /* Sidebar */
 .sidebar-container {
-    margin-top: 3em;
+    margin-top: 2.9em;
     padding: 1em;
+    border-radius: 0.9em;
 }
 
 .list-group {
@@ -47,10 +48,16 @@ a {
 }
 
 .sidebar-header {
+    width: 80%;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
     text-align: center;
     padding: 0.5em;
     border-radius: 2em;
     background-color: green;
+    margin-bottom: 1em;
     
 }
 
@@ -90,11 +97,17 @@ a {
     padding-bottom: 0.3em;
 } */
 
+/* Cards */
 
-/* .anyClass {
+
+.card-title {
+    padding-top: 0.5em;
+}
+
+.side-scroll {
     height:150px;
     overflow-y: scroll;
-  } */
+  }
 
 
   .thecard {
@@ -124,6 +137,13 @@ a {
   
   .thecard__side--back {
     background-color: green;
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    border-radius: 0.3em;
+
+  }
+  .thecard__side--back--unliked {
+    background-color: red;
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
     border-radius: 0.3em;

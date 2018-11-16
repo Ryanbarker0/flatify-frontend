@@ -26,14 +26,13 @@ const getUserPlaylists = () => {
 
 
 const renderUserPlaylistList = playlist => {
-    const userPlaylistContainer = document.getElementById('user-playlist-list')
-    const userPlaylistElement = document.createElement('ul')
-        userPlaylistElement.classList.add("nav.nav-pills.nav-stacked.anyClass")
+    // const userPlaylistContainer = document.getElementById('user-playlist-list')
+    const userPlaylistElement = document.createElement('div')
+        userPlaylistElement.classList.add("nav.nav-pills.nav-stacked.side-scroll")
         userPlaylistElement.innerHTML = `
 
-        <li class="nav-item">
-          <a class="nav-link" href="#">${playlist.name}</a>
-        </li>
+            <p>${playlist.name}</p>
+       
             
             `
             sidebarContainer.appendChild(userPlaylistElement)
