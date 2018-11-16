@@ -22,15 +22,21 @@ const renderSong = (song, user, usersLikes) => {
     contentContainer.appendChild(songList)
     const songItem = document.getElementById(`song-${song.id}`)
     const likeBtnTag = document.querySelector(`i[data-id='${song.id}']`)
-    if (currentUser > 0) {
-        const foundLike = usersLikes.find(element => element.song_id === parseInt(song.id))
-        if (!!foundLike) {
-        likeBtnTag.dataset.likeId = `${foundLike.id}`
-        }
-    }
+    // if (currentUser > 0) {
+    //     const foundLike = usersLikes.find(element => element.song_id === parseInt(song.id))
+    //     console.log(foundLike)
+    //     if (!!foundLike) {
+    //     likeBtnTag.dataset.likeId = `${foundLike.id}`
+    //     }
+    // }
     if (currentUser.id > 0) {
+        const foundLike = usersLikes.find(element => element.song_id === parseInt(song.id))
+        console.log(foundLike)
+        if (!!foundLike) {
+            likeBtnTag.dataset.likeId = `${foundLike.id}`
+        }
         addPlaylistDropDownMenu(songItem, user, song)
-    }
+     }
 }
 
 const getAllSongs = () => {
@@ -39,20 +45,20 @@ const getAllSongs = () => {
             getLikes()
                 .then(likes => {
                  localLikes = likes
-            renderAllSongs(songs)
+            const usersLikes = () => {
+                    if (currentUser.id > 0) {
+                        return findLikesOfCurrentUser()
+                    }
+                }
+            renderAllSongs(songs, usersLikes())
             checkIfSongIsLiked()
             })
         })
 }
 
-const renderAllSongs = songs => {
+const renderAllSongs = (songs, usersLikes) => {
     const user = findCurrentUserInState()
-    const usersLikes = () => {
-        if (currentUser > 0) {
-        return findLikesOfCurrentUser()
-        }
-    }
-    songs.forEach(song => renderSong(song, user, usersLikes()))
+    songs.forEach(song => renderSong(song, user, usersLikes))
 }
 
 const findLikesOfCurrentUser = () => localLikes.filter(element => (element.user_id == findCurrentUserInState().id))
