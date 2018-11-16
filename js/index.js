@@ -44,10 +44,8 @@ const createPlaylistList = () => {
 const renderTopPlaylist = playlist => {
     const playlistContainer = document.getElementById('playlist-list')
     const playlistElement = document.createElement('div')
+    // findSongsOfCurrentPlaylist(playlist)
 
-    // const getSongsFromPlaylist = playlist.songs
-
-    // console.log(getSongsFromPlaylist.length)
 
     playlistElement.classList.add('col-md-4')
     playlistElement.innerHTML = `
@@ -58,8 +56,8 @@ const renderTopPlaylist = playlist => {
             <h5 class='card-title'>${playlist.name}</h5>
         </div>
         <div class="thecard__side thecard__side--back text-center">
-            <h6>Songs</h6>
-
+            <h6 class="card-title">Songs</h6>
+        <ul id="playlist-song-list"></ul>
         </div>
       </div>
         `

@@ -14,6 +14,7 @@ const createAllSongsHeader = () => {
 const renderSong = (song, user, usersLikes) => {
     const songList = document.createElement('div')
     songList.className = 'song-list'
+    songList.className = 'container'
     songList.innerHTML = `
         <h5 id='${song.id}'>${song.name}</h5>
         <p id='song-${song.id}'>${song.artist} <i id="like-heart" data-id="${song.id}" class="heart far fa-heart"> Like</i> </p>
