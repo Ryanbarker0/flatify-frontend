@@ -4,6 +4,10 @@ const results = {
 
 const renderSearchHeader = () => {
     const searchHeader = document.createElement('h2')
+<<<<<<< HEAD
+=======
+        searchHeader.classList.add('text-center')
+>>>>>>> 0ee3ee0f296cca2316adbba7fd35422bfd4c5f4e
     searchHeader.innerText = 'Song Search'
     contentContainer.appendChild(searchHeader)
 }
@@ -11,9 +15,11 @@ const renderSearchHeader = () => {
 const renderSearchBar = () => {
     const searchForm = document.createElement('form')
     searchForm.id = 'search-form'
+    searchForm.classList.add('search-form')
+    searchForm.classList.add('text-center')
     searchForm.innerHTML = `
-    <input id='search-bar' type="text" name="q" size="21" maxlength="120">
-    <input id='submit' type="submit" value="Search">
+    <input id='search-bar' type="text" class="form-control-lg" name="q" size="21" maxlength="120">
+    <input id='submit' type="submit" class="btn btn-primary" value="Search">
     `
     contentContainer.appendChild(searchForm)
     searchSubmissionListener()
@@ -22,6 +28,7 @@ const renderSearchBar = () => {
 const renderResultsContainer = () => {
     const resultsContainer = document.createElement('div')
     resultsContainer.id = 'results-container'
+    resultsContainer.classList.add('container')
     contentContainer.appendChild(resultsContainer)
 }
 
@@ -50,7 +57,7 @@ const iterateAndAppendResults = () => {
         const trackItem = document.createElement('div')
         trackItem.id = 'track-item'
         trackItem.innerHTML = `<h5>${track.name}</h5>
-        <p>${track.artist} <iframe src="https://open.spotify.com/embed/track/${track.id}" width="300" height="100" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        <p>${track.artist} <br><iframe src="https://open.spotify.com/embed/track/${track.id}" width="300" height="100" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
  </p>`
         resultsContainer.appendChild(trackItem)
     })
