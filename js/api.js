@@ -20,6 +20,21 @@ const getPlaylist = async playlist => {
     return response.json()
 }
 
+const getLikes = async () => {
+    const response = await fetch(likesURL)
+    return response.json()
+}
+
+const getSongs = async () => {
+    const response = await fetch(songsURL)
+    return response.json()
+}
+
+const getPlaylistSongs = async () => {
+    const response = await fetch(playlistSongURL)
+    return response.json()
+}
+
 const createNewUser = newUser => 
     fetch(usersURL, {
         method: 'POST',
@@ -62,13 +77,6 @@ const createPlaylistSong = (playlistId, songId) =>
         })
     }).then(resp => resp.json())
 
-
-
-const getSongs = async () => {
-    const response = await fetch(songsURL)
-    return response.json()
-}
-
 const createNewSong = newSong => 
     fetch(songsURL, {
         method: 'POST',
@@ -104,14 +112,15 @@ const likeSong = (user, likedSong) =>
         })
     }).then(resp => resp.json())
 
-const getLikes = async () => {
-    const response = await fetch(likesURL)
-    return response.json()
-}
-
 const deleteLike = likeId =>
     fetch(`${likesURL}/${likeId}`, {
         method: 'DELETE'
     }).then(resp => resp.json())
+
+const deletePlaylistSong = playlistSong => {
+        fetch(`${playlistSongURL}/${playlistSong.id}`, {
+            method: 'DELETE'
+    })
+}
 
 
